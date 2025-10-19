@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Omni-Class Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        button { padding: 10px 20px; margin: 10px 0; background: #ff9500; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #e6850e; }
+        .result { margin: 10px 0; padding: 10px; background: #f8f9fa; border-radius: 4px; }
+        .error { background: #fee; border-left: 4px solid #e53e3e; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Omni-Class Backend Test</h1>
+    
+    <div class="test-section">
+        <h3>Backend Health Check</h3>
+        <button onclick="testHealth()">Test Health Endpoint</button>
+        <div id="healthResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>AI Generation Test</h3>
+        <input type="text" id="generationPrompt" placeholder="Enter a prompt..." style="width: 300px; padding: 8px; margin-right: 10px;">
+        <button onclick="testGeneration()">Test Generation</button>
+        <div id="generationResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>AI Research Test</h3>
+        <input type="text" id="researchPrompt" placeholder="Enter a research question..." style="width: 300px; padding: 8px; margin-right: 10px;">
+        <button onclick="testResearch()">Test Research</button>
+        <div id="researchResult" class="result"></div>
+    </div>
+
+    <div class="test-section">
+        <h3>Available Models</h3>
+        <button onclick="testModels()">Get Available Models</button>
+        <div id="modelsResult" class="result"></div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:3001/api';
+
+        async function testHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                document.getElementById('healthResult').innerHTML = 
+                    `<strong>✅ Success:</strong> ${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                document.getElementById('healthResult').innerHTML = 
+                    `<strong>❌ Error:</strong> ${error.message}`;
+                document.getElementById('healthResult').className = 'result error';
+            }
+        }
+
+        async function testGeneration() {
+            const prompt = document.getElementById('generationPrompt').value || 'What is programming?';
+            try {
+                const response = await fetch(`${API_BASE}/ai/generation`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+                const data = await response.json();
+                document.getElementById('generationResult').innerHTML = 
+                    `<strong>✅ Success:</strong><br>${data.response}`;
+            } catch (error) {
+                document.getElementById('generationResult').innerHTML = 
+                    `<strong>❌ Error:</strong> ${error.message}`;
+                document.getElementById('generationResult').className = 'result error';
+            }
+        }
+
+        async function testResearch() {
+            const prompt = document.getElementById('researchPrompt').value || 'What is machine learning?';
+            try {
+                const response = await fetch(`${API_BASE}/ai/research`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt })
+                });
+                const data = await response.json();
+                document.getElementById('researchResult').innerHTML = 
+                    `<strong>✅ Success:</strong><br>${data.response}`;
+            } catch (error) {
+                document.getElementById('researchResult').innerHTML = 
+                    `<strong>❌ Error:</strong> ${error.message}`;
+                document.getElementById('researchResult').className = 'result error';
+            }
+        }
+
+        async function testModels() {
+            try {
+                const response = await fetch(`${API_BASE}/models`);
+                const data = await response.json();
+                document.getElementById('modelsResult').innerHTML = 
+                    `<strong>✅ Available Models:</strong><br>${JSON.stringify(data, null, 2)}`;
+            } catch (error) {
+                document.getElementById('modelsResult').innerHTML = 
+                    `<strong>❌ Error:</strong> ${error.message}`;
+                document.getElementById('modelsResult').className = 'result error';
+            }
+        }
+
+        // Auto-test health on page load
+        window.onload = () => {
+            testHealth();
+        };
+    </script>
+</body>
+</html>

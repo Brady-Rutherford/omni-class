@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Note-Taking App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="window-controls">
+                <div class="control-btn close"></div>
+                <div class="control-btn minimize"></div>
+                <div class="control-btn maximize"></div>
+            </div>
+            <h1 class="app-title">Classes</h1>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Side - Note Taking Area -->
+            <section class="notes-section">
+                <div class="lesson-header">
+                    <h2>CS110 LESSON 5</h2>
+                </div>
+                <div class="notes-container">
+                    <textarea 
+                        id="notesTextarea" 
+                        placeholder="Start taking your notes here..."
+                        class="notes-textarea"
+                    ></textarea>
+                </div>
+                <div class="notes-actions">
+                    <button id="finalizeNotes" class="finalize-btn">Finalize Notes</button>
+                </div>
+            </section>
+
+            <!-- Right Side - AI Boxes -->
+            <aside class="ai-section">
+                <!-- Classes Context Box -->
+                <div class="ai-box classes-box">
+                    <div class="box-header">
+                        <h3>Classes</h3>
+                    </div>
+                    <div class="box-content">
+                        <div class="class-item">
+                            <span class="class-name">CS110 LESSON 1</span>
+                            <span class="class-status">Completed</span>
+                        </div>
+                        <div class="class-item">
+                            <span class="class-name">CS110 LESSON 2</span>
+                            <span class="class-status">Completed</span>
+                        </div>
+                        <div class="class-item">
+                            <span class="class-name">CS110 LESSON 3</span>
+                            <span class="class-status">Completed</span>
+                        </div>
+                        <div class="class-item">
+                            <span class="class-name">CS110 LESSON 4</span>
+                            <span class="class-status">Completed</span>
+                        </div>
+                        <div class="add-class-item" id="addNewClass">
+                            <span class="add-class-text">+ Add New Class</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Research AI Box -->
+                <div class="ai-box research-box" id="researchBox">
+                    <div class="box-header">
+                        <h3>Research AI</h3>
+                        <button class="expand-btn" id="expandResearch">+</button>
+                    </div>
+                    <div class="box-content">
+                        <div class="input-section">
+                            <textarea 
+                                id="researchPrompt" 
+                                placeholder="Ask Perplexity AI for research help..."
+                                class="prompt-textarea"
+                            ></textarea>
+                            <button id="askResearch" class="ask-btn">Ask</button>
+                        </div>
+                        <div class="response-section">
+                            <div id="researchResponse" class="response-content"></div>
+                            <button id="useResearchResponse" class="use-response-btn" style="display: none;">Use in Notes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generation AI Box -->
+                <div class="ai-box generation-box" id="generationBox">
+                    <div class="box-header">
+                        <h3>Generation AI</h3>
+                        <button class="expand-btn" id="expandGeneration">+</button>
+                    </div>
+                    <div class="box-content">
+                        <div class="input-section">
+                            <textarea 
+                                id="generationPrompt" 
+                                placeholder="Ask ChatGPT-style AI for help..."
+                                class="prompt-textarea"
+                            ></textarea>
+                            <button id="askGeneration" class="ask-btn">Ask</button>
+                        </div>
+                        <div class="response-section">
+                            <div id="generationResponse" class="response-content"></div>
+                            <button id="useGenerationResponse" class="use-response-btn" style="display: none;">Use in Notes</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Toggle Button -->
+                <div class="toggle-container">
+                    <div class="toggle-switch" id="aiToggle">
+                        <div class="toggle-slider"></div>
+                        <span class="toggle-label research-label">Research</span>
+                        <span class="toggle-label generation-label">Generate</span>
+                    </div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <!-- Add New Class Modal -->
+    <div class="modal-overlay" id="addClassModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Class</h3>
+                <button class="modal-close" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addClassForm">
+                    <div class="form-group">
+                        <label for="className">Class Name:</label>
+                        <input type="text" id="className" placeholder="e.g., CS110 LESSON 5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="classSubject">Subject:</label>
+                        <select id="classSubject">
+                            <option value="CS110">CS110 - Introduction to Programming</option>
+                            <option value="CS111">CS111 - Data Structures</option>
+                            <option value="MATH101">MATH101 - Calculus</option>
+                            <option value="PHYS101">PHYS101 - Physics</option>
+                            <option value="ENG101">ENG101 - English</option>
+                            <option value="OTHER">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="classNotes">Initial Notes (Optional):</label>
+                        <textarea id="classNotes" placeholder="Add any initial notes or topics for this class..."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" id="cancelAddClass">Cancel</button>
+                <button type="button" class="btn-add" id="confirmAddClass">Add Class</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
