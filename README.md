@@ -1,6 +1,6 @@
 # Omni-Class: AI-Powered Student Note-Taking App
 
-A powerful note-taking application with integrated AI assistance using free open-source language models.
+I am making a powerful note-taking application with integrated AI assistance using free open-source language models for now and if it is succesful I may upgrade. Essentially I am building a free software that is open surce that prevents cognitive decay from AI usage 
 
 ## Features
 
@@ -10,7 +10,6 @@ A powerful note-taking application with integrated AI assistance using free open
 - 📚 **Class Management**: Organize notes by classes and lessons
 - 🔄 **Real-time AI**: Connect to free 1B parameter Llama models via Hugging Face
 - 💾 **Auto-save**: Your notes are automatically saved locally
-- 🎨 **Modern UI**: Beautiful, responsive design inspired by modern note-taking apps
 
 ## Quick Start
 
