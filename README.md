@@ -1,6 +1,6 @@
 # Omni-Class: AI-Powered Student Note-Taking App
 
-I am making a powerful note-taking application with integrated AI assistance using free open-source language models for now and if it is succesful I may upgrade. Essentially I am building a free software that is open surce that prevents cognitive decay from AI usage 
+I am making a powerful note-taking application with integrated AI assistance using free open-source language models for now and if it is succesful I may upgrade. Essentially I am building a free software that is open source that prevents cognitive decay from excessive AI usage.
 
 ## Features
 
