@@ -128,3 +128,4 @@ Switch models via the API or modify `config.js`.
 ---
 
 **Happy Note-Taking! 📝✨**
+

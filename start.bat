@@ -59,3 +59,4 @@ if %errorlevel% equ 0 (
 
 REM Keep the window open
 pause
+

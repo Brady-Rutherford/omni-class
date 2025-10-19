@@ -77,3 +77,4 @@ trap cleanup SIGINT SIGTERM
 
 # Keep the script running
 wait
+
